@@ -23,6 +23,7 @@
     this.ele = document.createElement('div')
   }
   Food.prototype.init = function () {
+    removeFood() // 先删除
     this.ele.style.width = this.width + 'px'
     this.ele.style.height = this.height + 'px'
     this.ele.style.position = 'absolute'
