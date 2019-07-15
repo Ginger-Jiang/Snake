@@ -5,6 +5,14 @@
   function Random (max, min) {
     return Math.floor(Math.random() * (max - min) + min)
   }
+  // 私有方法
+  function removeFood () {
+    for (var i = 0; i < elements.length; i++) {
+      var ele = elements[i]
+      ele.parentNode.removeChild(ele)
+      elements.splice(i, 1)
+    }
+  }
   // 食物有宽高颜色坐标
   function Food (width, height, color, x, y) {
     this.width = width || 20
@@ -29,7 +37,6 @@
     this.ele.style.left = this.x
     this.ele.style.top = this.y
   }
-
 
   win.Food = Food
 }(window));
