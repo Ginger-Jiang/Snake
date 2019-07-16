@@ -1,3 +1,4 @@
+// 食物构造函数
 (function (win) {
   var map = document.querySelector('.map')
   var elements = [] // 食物数组
@@ -41,5 +42,33 @@
 
   win.Food = Food
 }(window));
+
+(function () {
+  var elements = []
+  function Snake (width, height, direction) {
+    this.width = width
+    this.height = height
+    this.body = [
+      { x: 3, y: 2, color: 'red' },
+      { x: 2, y: 2, color: 'green' },
+      { x: 1, y: 2, color: 'green' }
+    ]
+    this.direction = direction || 'right'
+  }
+  Snake.prototype.init = function (map) {
+    for (var i = 0; i < this.body.length; i++) {
+      var obj = this.body[i]
+      var div = document.createElement('div')
+      map.appendChild(div)
+      div.style.position = 'absolute'
+      div.style.width = this.width + 'px'
+      div.style.height = this.height + 'px'
+      div.style.left = obj.x
+      div.style.top = obj.y
+      div.style.backgroundColor = obj.color
+      elements.push(div)
+    }
+  }
+}());
 
 new Food().init()
