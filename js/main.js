@@ -1,6 +1,5 @@
 // 食物构造函数
 (function () {
-  var map = document.querySelector('.map')
   var elements = [] // 食物数组
   // 随机坐标
   function Random (max, min) {
@@ -23,7 +22,7 @@
     this.y = y || 0
     this.ele = document.createElement('div')
   }
-  Food.prototype.init = function () {
+  Food.prototype.init = function (map) {
     removeFood() // 先删除
     this.ele.style.width = this.width + 'px'
     this.ele.style.height = this.height + 'px'
@@ -71,9 +70,27 @@
       elements.push(div)
     }
   }
+  Snake.prototype.move = function (food, map) {
+    var i = this.body.length - 1 // 获取蛇身体长度(不包含头)
+    for (; i > 0; i--) {
+      this.body[i].x = this.body[i - 1].x
+      this.body[i].y = this.body[i - 1].y
+    }
+    // 头
+    switch (this.direction) {
+      case 'right': this.body[0].x++; break
+      case 'left': this.body[0].x--; break
+      case 'top': this.body[0].y++; break
+      case 'bottom': this.body[0].y++; break
+    }
+  }
 
   window.Snake = Snake
 }());
 
-new Food().init()
-new Snake().init(document.querySelector('.map'))
+var map = document.querySelector('.map')
+var fd = new Food()
+fd.init(map)
+var snake = new Snake()
+snake.init(map)
+snake.move(fd, map)
