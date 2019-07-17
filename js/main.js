@@ -1,5 +1,5 @@
 // 食物构造函数
-(function (win) {
+(function () {
   var map = document.querySelector('.map')
   var elements = [] // 食物数组
   // 随机坐标
@@ -40,18 +40,20 @@
     this.ele.style.top = this.y
   }
 
-  win.Food = Food
+  window.Food = Food
 }(window));
 
+
+// 蛇
 (function () {
   var elements = []
   function Snake (width, height, direction) {
-    this.width = width
-    this.height = height
+    this.width = width || 20
+    this.height = height || 20
     this.body = [
       { x: 3, y: 2, color: 'red' },
-      { x: 2, y: 2, color: 'green' },
-      { x: 1, y: 2, color: 'green' }
+      { x: 2, y: 2, color: 'yellow' },
+      { x: 1, y: 2, color: 'yellow' }
     ]
     this.direction = direction || 'right'
   }
@@ -63,12 +65,15 @@
       div.style.position = 'absolute'
       div.style.width = this.width + 'px'
       div.style.height = this.height + 'px'
-      div.style.left = obj.x
-      div.style.top = obj.y
+      div.style.left = obj.x * this.width + 'px'
+      div.style.top = obj.y * this.height + 'px'
       div.style.backgroundColor = obj.color
       elements.push(div)
     }
   }
+
+  window.Snake = Snake
 }());
 
 new Food().init()
+new Snake().init(document.querySelector('.map'))
