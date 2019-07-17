@@ -57,6 +57,7 @@
     this.direction = direction || 'right'
   }
   Snake.prototype.init = function (map) {
+    remove() // 删除🐍
     for (var i = 0; i < this.body.length; i++) {
       var obj = this.body[i]
       var div = document.createElement('div')
@@ -85,6 +86,16 @@
     }
   }
 
+  // 删除🐍
+  function remove () {
+    var i = elements.length - 1 // 蛇尾
+    for (; i >= 0; i--) {
+      var ele = elements[i]
+      ele.parentNode.removeChild(ele)
+      elements.splice(i, 1)
+    }
+  }
+
   window.Snake = Snake
 }());
 
@@ -92,5 +103,8 @@ var map = document.querySelector('.map')
 var fd = new Food()
 fd.init(map)
 var snake = new Snake()
-snake.init(map)
-snake.move(fd, map)
+setInterval(() => {
+  console.log('蛇动了')
+  // snake.move(fd, map)
+  // snake.init(map)
+}, 150)
